@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+    	<title> OS Panel </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style type="text/css">
+            * { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; }
+	</style>
+
+    </head>
+
+    <body>
+    	<form action="/panel" method="post">
+	    <select name="operation">
+	        <option value="copy_homes">Copiar Datos de Usuarios (hogares)</option>
+	        <option value="clean_homes">Limpiar Datos de Usuarios (hogares)</option>
+	        <option value="firewall_realod">Recargar Reglas de Firewall </option>
+		<option value="block_site">Bloquear Sitio Web </option>
+		<option value="allow_site">Liberar Sitio Web </option>
+	    </select>
+	    <input type="submit" value="Confirmar">
+	</form>
+    </body>
+
+</html>
