@@ -8,7 +8,6 @@ class SQLite:
     def __init__(self):
         """ Database object setup. """
         self.db = sqlite3.connect('puppy.sqlite3')
-        self.db.close()
 
     def login(self, username, password):
         """
