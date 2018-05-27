@@ -65,6 +65,27 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
+    def remove_action(self, name):
+        """
+            Removes an action.
+
+            Parameters:
+                - name:   action name
+        """
+        cursor = self.db.cursor()
+        query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
+        cursor.execute(query)
+        self.db.commit()
+
+    def list_actions(self):
+        """
+            List actions.
+        """
+        cursor = self.db.cursor()
+        query = """ SELECT * FROM Actions """
+        cursor.execute(query)
+        self.db.commit()
+
     def initial_setup(self):
         """
             Creates the following tables for initial database setup:
