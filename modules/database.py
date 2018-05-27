@@ -51,7 +51,7 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
-    def create_action(self, name, action):
+    def create_action(self, name, action, description):
         """
             Creates a new action.
 
@@ -60,8 +60,8 @@ class SQLite:
                 - action: command that executes the action
         """
         cursor = self.db.cursor()
-        query = """ INSERT INTO Actions (Name, Action) VALUES
-                    ('{0}', '{1}') """.format(name, action)
+        query = """ INSERT INTO Actions (Name, Action, Description) VALUES
+                    ('{0}', '{1}') """.format(name, action, description)
         cursor.execute(query)
         self.db.commit()
 
@@ -86,7 +86,7 @@ class SQLite:
         StartTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         EndTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         create_actions = """ CREATE TABLE Actions
-        (Id INTEGER PRIMARY KEY, Name TEXT, Action TEXT,
+        (Id INTEGER PRIMARY KEY, Name TEXT, Action TEXT, Description TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         add_admin = """ INSERT INTO
