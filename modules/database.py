@@ -58,6 +58,7 @@ class SQLite:
                 - Sessions: controlling sessions of authenticated users
         """
         cursor = self.db.cursor()
+        # queries
         drop_users = """ DROP TABLE IF EXISTS Users """
         drop_sessions = """ DROP TABLE IF EXISTS Sessions """
         create_users = """ CREATE TABLE Users
@@ -72,6 +73,7 @@ class SQLite:
         add_admin = """ INSERT INTO
         Users (FullName, UserName, Password)
         VALUES ('Administrator', 'root', 'root') """
+        # execution
         cursor.execute(drop_users)
         cursor.execute(drop_sessions)
         cursor.execute(create_users)
