@@ -2,6 +2,7 @@
 
 
 from flask import Flask, redirect, render_template, request
+from modules.database import SQLite
 
 __author__ = "@ivanleoncz"
 
@@ -21,7 +22,13 @@ def f_login():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        return redirect("/panel")
+        db = SQLite()
+        status = db.login(username, password)
+        if status == 0:
+            return redirect("/panel")
+        else:
+            message = "Check Username and Password."
+            return render_template("login.html", login_status=message)
 
 
 @app.route("/panel", methods=['GET', 'POST'])
