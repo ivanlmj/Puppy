@@ -69,8 +69,7 @@ class SQLite:
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         admin = """ INSERT INTO
         Users (FullName, UserName, Password)
-        VALUES ('Administrator', 'root', 'root')
-        """
+        VALUES ('Administrator', 'root', 'root') """
         sessions = """ CREATE TABLE Sessions
         (Id INTEGER PRIMARY KEY, UserName TEXT,
         StartTime DATETIME DEFAULT CURRENT_TIMESTAMP,
