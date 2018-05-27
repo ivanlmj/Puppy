@@ -51,6 +51,20 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
+    def create_action(self, name, action):
+        """
+            Creates a new action.
+
+            Parameters:
+                - name:   action name
+                - action: command that executes the action
+        """
+        cursor = self.db.cursor()
+        query = """ INSERT INTO Actions (Name, Action) VALUES
+                    ('{0}', '{1}') """.format(name, action)
+        cursor.execute(query)
+        self.db.commit()
+
     def initial_setup(self):
         """
             Creates the following tables for initial database setup:
