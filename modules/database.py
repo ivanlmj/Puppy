@@ -7,7 +7,7 @@ class SQLite:
 
     def __init__(self):
         """ Database setup. """
-        self.db = sqlite3.connect('puppy.sqlite3')
+        self.db = sqlite3.connect('../puppy.sqlite3')
 
     def login(self, username, password):
         """
