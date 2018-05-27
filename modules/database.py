@@ -60,21 +60,21 @@ class SQLite:
         cursor = self.db.cursor()
         drop_users = """ DROP TABLE IF EXISTS Users """
         drop_sessions = """ DROP TABLE IF EXISTS Sessions """
-        cursor.execute(drop_users)
-        cursor.execute(drop_sessions)
-        users = """ CREATE TABLE Users
+        create_users = """ CREATE TABLE Users
         (Id INTEGER PRIMARY KEY,
         FullName TEXT, UserName TEXT, PassWord TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
-        admin = """ INSERT INTO
-        Users (FullName, UserName, Password)
-        VALUES ('Administrator', 'root', 'root') """
-        sessions = """ CREATE TABLE Sessions
+        create_sessions = """ CREATE TABLE Sessions
         (Id INTEGER PRIMARY KEY, UserName TEXT,
         StartTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         EndTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
-        cursor.execute(users)
-        cursor.execute(admin)
-        cursor.execute(sessions)
+        add_admin = """ INSERT INTO
+        Users (FullName, UserName, Password)
+        VALUES ('Administrator', 'root', 'root') """
+        cursor.execute(drop_users)
+        cursor.execute(drop_sessions)
+        cursor.execute(create_users)
+        cursor.execute(create_sessions)
+        cursor.execute(add_admin)
         self.db.commit()
