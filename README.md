@@ -1,2 +1,2 @@
 # Puppy
-Controlling operations on a server with a simple panel.
+An assistant for server administration.
