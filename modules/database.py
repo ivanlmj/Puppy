@@ -34,7 +34,7 @@ class SQLite:
             else:
                 return 1
         else:
-            return 2
+            return 1
 
     def create_user(self, fullname, username, password):
         """
@@ -61,6 +61,7 @@ class SQLite:
         # queries
         drop_users = """ DROP TABLE IF EXISTS Users """
         drop_sessions = """ DROP TABLE IF EXISTS Sessions """
+        drop_actions = """ DROP TABLE IF EXISTS Actions """
         create_users = """ CREATE TABLE Users
         (Id INTEGER PRIMARY KEY,
         FullName TEXT, UserName TEXT, PassWord TEXT,
@@ -70,6 +71,10 @@ class SQLite:
         (Id INTEGER PRIMARY KEY, UserName TEXT,
         StartTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         EndTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
+        create_actions = """ CREATE TABLE Actions
+        (Id INTEGER PRIMARY KEY, Name TEXT, Action TEXT,
+        CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         add_admin = """ INSERT INTO
         Users (FullName, UserName, Password)
         VALUES ('Administrator', 'root', 'root') """
@@ -78,5 +83,6 @@ class SQLite:
         cursor.execute(drop_sessions)
         cursor.execute(create_users)
         cursor.execute(create_sessions)
+        cursos.execute(create_actions)
         cursor.execute(add_admin)
         self.db.commit()
