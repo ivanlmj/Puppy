@@ -110,6 +110,10 @@ class SQLite:
         (Id INTEGER PRIMARY KEY, Name TEXT, Action TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
+        log_actions = """ CREATE TABLE LogActions
+        (Id INTEGER PRIMARY KEY, ActionName TEXT, RunBy TEXT,
+        CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         add_admin = """ INSERT INTO
         Users (FullName, UserName, Password)
         VALUES ('Administrator', 'root', 'root') """
@@ -119,5 +123,6 @@ class SQLite:
         cursor.execute(create_users)
         cursor.execute(create_sessions)
         cursos.execute(create_actions)
+        cursor.execute(log_actions)
         cursor.execute(add_admin)
         self.db.commit()
