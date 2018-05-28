@@ -86,7 +86,7 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
-    def list_log_actions(self):
+    def logged_actions(self):
         """
             List logged actions.
         """
