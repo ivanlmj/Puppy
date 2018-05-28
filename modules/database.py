@@ -86,6 +86,15 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
+    def list_log_actions(self):
+        """
+            List logged actions.
+        """
+        cursor = self.db.cursor()
+        query = """ SELECT * FROM LogActions """
+        cursor.execute(query)
+        self.db.commit()
+
     def initial_setup(self):
         """
             Creates the following tables for initial database setup:
