@@ -122,7 +122,7 @@ class SQLite:
         cursor.execute(drop_sessions)
         cursor.execute(create_users)
         cursor.execute(create_sessions)
-        cursos.execute(create_actions)
+        cursor.execute(create_actions)
         cursor.execute(log_actions)
         cursor.execute(add_admin)
         self.db.commit()
