@@ -84,7 +84,9 @@ class SQLite:
         cursor = self.db.cursor()
         query = """ SELECT * FROM Actions """
         cursor.execute(query)
+        data = cursor.fetchall()
         self.db.commit()
+        return data
 
     def logged_actions(self):
         """
@@ -93,7 +95,9 @@ class SQLite:
         cursor = self.db.cursor()
         query = """ SELECT * FROM LogActions """
         cursor.execute(query)
+        data = cursor.fetchall()
         self.db.commit()
+        return data
 
     def initial_setup(self):
         """
