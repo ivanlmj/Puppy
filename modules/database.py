@@ -87,7 +87,7 @@ class SQLite:
         cursor = self.db.cursor()
         query = """ SELECT * FROM Actions """
         cursor.execute(query)
-        data = cursor.fetchall()
+        data = [ row for row in cursor.fetchall() ]
         self.db.commit()
         return data
 
