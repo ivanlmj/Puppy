@@ -2,6 +2,7 @@
 
 
 from flask import Flask, redirect, render_template, request
+from json import dumps
 from modules.database import SQLite
 
 __author__ = "@ivanleoncz"
@@ -40,6 +41,13 @@ def f_panel():
             return "Blocked!"
         else:
             return "Operation Not Recognized..."
+
+
+@app.route("/actions", methods=['GET'])
+def f_actions():
+    db = SQLite()
+    actions = db.list_actions()
+    return dumps(actions)
 
 
 if __name__ == "__main__":
