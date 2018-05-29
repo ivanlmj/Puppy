@@ -1,13 +1,16 @@
 #!/usr/bin/python3
 
 from datetime import datetime
+import os.path
 import sqlite3
 
 class SQLite:
 
     def __init__(self):
         """ Database setup. """
-        self.db = sqlite3.connect('../puppy.sqlite3')
+        BASE_DIR = os.path.dirname(os.path.abspath(__name__))
+        db_path = os.path.join(BASE_DIR, "puppy.sqlite3")
+        self.db = sqlite3.connect(db_path)
 
     def login(self, username, password):
         """
