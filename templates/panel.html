@@ -24,19 +24,50 @@
 	    <input type="submit" value="Confirmar">
 	</form>
 	<div id="actions"> </div>
+	<p id='error'> </p>
 
 	<script>
 
-	    let xhttp = new XMLHttpRequest();
-	    let data;
-	    xhttp.onreadystatechange = function () {
-		if (this.readyState == 4 && this.status == 200) {
-		    let jsonObj = JSON.parse(this.responseText);
-		    data = this.jsonObj;
+	    function requestLoggedActions() {
+		console.log("Calling: requestLoggedActions()")
+		var xhttp = new XMLHttpRequest();
+		try {
+		    xhttp.onreadystatechange = function () {
+		        if (this.readyState == 4 && this.status == 200) {
+		            console.log(`Request Status: ${this.status}`)
+		            console.log(`Request Data: ${this.responseText}`)
+			    buildTable(JSON.parse(xhttp.responseText));
+			}
+		    };
+		    xhttp.open('GET', '/actions' );
+		    xhttp.send();
+		} catch (err) {
+		    document.getElementById("error").innerHTML = err.message;
+		    console.log("Error on xhr request.....")
 		}
 	    };
-	    xhttp.open('GET', '/actions' );
-	    xhttp.send();
+
+	    function buildTable(xhrResponse) {
+		console.log("Calling: buildTable(xhrResponse)")
+		var tableDiv = document.getElementById("actions");
+		var table = document.createElement('TABLE');
+
+		for (var i = 0; i < xhrResponse.length; i++) {
+		    console.log(`Building Row: ${i}`)
+		    var tr = document.createElement('TR');
+		    table.appendChild(tr);
+		    for (var j = 0; j < 5; j++) {
+			console.log(`Building Column: ${j}`)
+			var td = document.createElement('TD');
+			td.width = '75';
+			td.appendChild(document.createTextNode(xhrResponse[i][j]));
+			tr.appendChild(td);
+		    }
+		}
+		tableDiv.appendChild(table);
+	    };
+
+	    requestLoggedActions();
 
 	</script>
     </body>
