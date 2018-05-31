@@ -8,7 +8,6 @@ from modules.database import SQLite
 __author__ = "@ivanleoncz"
 
 app = Flask(__name__)
-db = SQLite()
 
 @app.route("/", methods=['GET'])
 @app.route("/index", methods=['GET'])
@@ -23,6 +22,7 @@ def f_login():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        db = SQLite()
         status = db.login(username, password)
         if status == 0:
             return redirect("/panel")
@@ -44,9 +44,10 @@ def f_panel():
 
 @app.route("/actions", methods=['GET'])
 def f_actions():
+    db = SQLite()
     actions = db.list_actions()
     return dumps(actions)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
