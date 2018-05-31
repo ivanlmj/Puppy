@@ -8,23 +8,38 @@
 
 	<style type="text/css">
             * { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; }
+	    #select_action { margin-top: 35px; }
+	    table, th, td {
+		text-align: center;
+		border-collapse: collapse;
+	    }
+	    table { width: 70%; border: 1px solid black; margin-top: 25px; }
+	    th { height: 35px; background-color: #4CAF50; color: white; font-weight: bold; }
+	    tr { height: 40px; }
+	    tr:nth-child(even) { background-color: #f2f2f2 }
+	    #id { width: 5%; }
 	</style>
 
     </head>
 
     <body>
-    	<form action="/panel" method="post">
-	    <select name="operation">
+	<h1> Puppy :) </h1>
+	<div id="select_action">
+	  <form action="/panel" method="post">
+	      <select name="operation">
 	        <option value="copy_homes">Copiar Datos de Usuarios (hogares)</option>
 	        <option value="clean_homes">Limpiar Datos de Usuarios (hogares)</option>
 	        <option value="firewall_realod">Recargar Reglas de Firewall </option>
 		<option value="block_site">Bloquear Sitio Web </option>
 		<option value="allow_site">Liberar Sitio Web </option>
-	    </select>
-	    <input type="submit" value="Confirmar">
-	</form>
+	      </select>
+	      <input type="submit" value="Confirmar">
+	  </form>
+	</div>
+
 	<div id="actions"> </div>
 	<p id='error'> </p>
+
 
 	<script>
 
@@ -51,6 +66,23 @@
 		console.log("Calling: buildTable(xhrResponse)")
 		var tableDiv = document.getElementById("actions");
 		var table = document.createElement('TABLE');
+		var header = document.createElement('TR');
+		var id = document.createElement('TH');
+		var name = document.createElement('TH');
+		var command = document.createElement('TH');
+		var create_time = document.createElement('TH');
+		var update_time = document.createElement('TH');
+		id.appendChild(document.createTextNode("Id"));
+		name.appendChild(document.createTextNode("Name"));
+		command.appendChild(document.createTextNode("Command"));
+		create_time.appendChild(document.createTextNode("Create Time"));
+		update_time.appendChild(document.createTextNode("Update Time"));
+		header.appendChild(id);
+		header.appendChild(name);
+		header.appendChild(command);
+		header.appendChild(create_time);
+		header.appendChild(update_time);
+		table.appendChild(header);
 
 		for (var i = 0; i < xhrResponse.length; i++) {
 		    console.log(`Building Row: ${i}`)
@@ -59,6 +91,9 @@
 		    for (var j = 0; j < 5; j++) {
 			console.log(`Building Column: ${j}`)
 			var td = document.createElement('TD');
+			if ( j == 0 ) {
+			    td.setAttribute("id", "id");
+			}
 			td.width = '75';
 			td.appendChild(document.createTextNode(xhrResponse[i][j]));
 			tr.appendChild(td);
