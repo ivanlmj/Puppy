@@ -1,17 +1,13 @@
-function ajaxRequest(path) {
+function ajaxRequest(path, cbFunction) {
 
     var xhttp = new XMLHttpRequest();
 
-    try {
-	xhttp.onreadystatechange = function () {
-	    if (this.readyState == 4 && this.status == 200) {
-	        return JSON.parse(xhttp.responseText);
-	    }
-	};
-	xhttp.open('GET', path );
-	xhttp.send();
-    } catch (err) {
-	console.log(`Error on XHR request: ${err.message}`);
-    }
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+	    cbFunction(xhttp.responseText);
+        }
+    };
+    xhttp.open('GET', path, true );
+    xhttp.send();
 
 };
