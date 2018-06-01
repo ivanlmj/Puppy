@@ -1,5 +1,5 @@
-function buildTable() {
-    var xhrResponse = ajaxRequest('/actions');
+function buildTable(data) {
+    var xhrResponse = JSON.parse(data);
 
     var tableDiv = document.getElementById("actions");
     var table = document.createElement('TABLE');
