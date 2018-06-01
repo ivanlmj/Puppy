@@ -37,73 +37,13 @@
 	  </form>
 	</div>
 
-	<div id="actions"> </div>
-	<p id='error'> </p>
+	<div id="actions">
+	</div>
 
-
+	<script src="/static/panel.js"></script>
+	<script src="/static/ajax.js"></script>
 	<script>
-
-	    function requestLoggedActions() {
-		console.log("Calling: requestLoggedActions()")
-		var xhttp = new XMLHttpRequest();
-		try {
-		    xhttp.onreadystatechange = function () {
-		        if (this.readyState == 4 && this.status == 200) {
-		            console.log(`Request Status: ${this.status}`)
-		            console.log(`Request Data: ${this.responseText}`)
-			    buildTable(JSON.parse(xhttp.responseText));
-			}
-		    };
-		    xhttp.open('GET', '/actions' );
-		    xhttp.send();
-		} catch (err) {
-		    document.getElementById("error").innerHTML = err.message;
-		    console.log("Error on xhr request.....")
-		}
-	    };
-
-	    function buildTable(xhrResponse) {
-		console.log("Calling: buildTable(xhrResponse)")
-		var tableDiv = document.getElementById("actions");
-		var table = document.createElement('TABLE');
-		var header = document.createElement('TR');
-		var id = document.createElement('TH');
-		var name = document.createElement('TH');
-		var command = document.createElement('TH');
-		var create_time = document.createElement('TH');
-		var update_time = document.createElement('TH');
-		id.appendChild(document.createTextNode("Id"));
-		name.appendChild(document.createTextNode("Name"));
-		command.appendChild(document.createTextNode("Command"));
-		create_time.appendChild(document.createTextNode("Create Time"));
-		update_time.appendChild(document.createTextNode("Update Time"));
-		header.appendChild(id);
-		header.appendChild(name);
-		header.appendChild(command);
-		header.appendChild(create_time);
-		header.appendChild(update_time);
-		table.appendChild(header);
-
-		for (var i = 0; i < xhrResponse.length; i++) {
-		    console.log(`Building Row: ${i}`)
-		    var tr = document.createElement('TR');
-		    table.appendChild(tr);
-		    for (var j = 0; j < 5; j++) {
-			console.log(`Building Column: ${j}`)
-			var td = document.createElement('TD');
-			if ( j == 0 ) {
-			    td.setAttribute("id", "id");
-			}
-			td.width = '75';
-			td.appendChild(document.createTextNode(xhrResponse[i][j]));
-			tr.appendChild(td);
-		    }
-		}
-		tableDiv.appendChild(table);
-	    };
-
-	    requestLoggedActions();
-
+		ajaxRequest("/actions", buildTable);
 	</script>
     </body>
 
