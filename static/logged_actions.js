@@ -23,11 +23,9 @@ function buildTable(data) {
     table.appendChild(header);
 
     for (var i = 0; i < xhrResponse.length; i++) {
-        console.log(`Building Row: ${i}`)
 	var tr = document.createElement('TR');
 	table.appendChild(tr);
 	for (var j = 0; j < 5; j++) {
-	    console.log(`Building Column: ${j}`)
 	    var td = document.createElement('TD');
             if ( j == 0 ) {
                 td.setAttribute("id", "id");
