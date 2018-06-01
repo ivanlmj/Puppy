@@ -26,12 +26,8 @@
 	<h1> Puppy :) </h1>
 	<div id="select_action">
 	  <form action="/panel" method="post">
-	      <select name="operation">
-	        <option value="copy_homes">Copiar Datos de Usuarios (hogares)</option>
-	        <option value="clean_homes">Limpiar Datos de Usuarios (hogares)</option>
-	        <option value="firewall_realod">Recargar Reglas de Firewall </option>
-		<option value="block_site">Bloquear Sitio Web </option>
-		<option value="allow_site">Liberar Sitio Web </option>
+	      <select id="action" name="operation">
+		<!-- <option>s are added dinamically (action.js) -->
 	      </select>
 	      <input type="submit" value="Confirmar">
 	  </form>
