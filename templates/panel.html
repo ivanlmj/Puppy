@@ -36,9 +36,12 @@
 	<div id="actions">
 	</div>
 
-	<script src="/static/panel.js"></script>
+
+	<script src="/static/actions.js"></script>
+	<script src="/static/logged_actions.js"></script>
 	<script src="/static/ajax.js"></script>
 	<script>
+		ajaxRequest("/actions", buildSelect)
 		ajaxRequest("/actions", buildTable);
 	</script>
     </body>
