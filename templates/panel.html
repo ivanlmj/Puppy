@@ -41,8 +41,8 @@
 	<script src="/static/logged_actions.js"></script>
 	<script src="/static/ajax.js"></script>
 	<script>
-		ajaxRequest("/actions", buildSelect)
-		ajaxRequest("/logged_actions", buildTable);
+		ajaxGet("/actions", buildSelect)
+		ajaxGet("/logged_actions", buildTable);
 	</script>
     </body>
 

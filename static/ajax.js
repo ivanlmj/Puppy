@@ -1,4 +1,4 @@
-function ajaxRequest(path, cbFunction) {
+function ajaxGet(path, cbFunction) {
 
     var xhttp = new XMLHttpRequest();
 
