@@ -80,7 +80,7 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
-    def list_actions(self):
+    def actions(self):
         """
             List actions.
         """
