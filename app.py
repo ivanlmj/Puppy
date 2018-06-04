@@ -31,15 +31,9 @@ def f_login():
             return render_template("login.html", login_status=message)
 
 
-@app.route("/panel", methods=['GET', 'POST'])
+@app.route("/panel", methods=['GET'])
 def f_panel():
-    if request.method == 'GET':
-        return render_template("panel.html")
-    elif request.method == 'POST':
-        if request.form["operation"] == "block_site":
-            return "Blocked!"
-        else:
-            return "Operation Not Recognized..."
+    return render_template("panel.html")
 
 
 @app.route("/actions", methods=['GET'])
