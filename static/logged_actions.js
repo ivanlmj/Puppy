@@ -22,18 +22,28 @@ function buildTable(data) {
     header.appendChild(update_time);
     table.appendChild(header);
 
-    for (var i = 0; i < xhrResponse.length; i++) {
-	var tr = document.createElement('TR');
+    if (xhrResponse.length == 0) {
+	var message = "No actions have been performed yet.";
+        var tr = document.createElement('TR');
+	var td = document.createElement('TD');
+	td.colSpan = 5;
+	td.appendChild(document.createTextNode(message));
+	tr.appendChild(td);
 	table.appendChild(tr);
-	for (var j = 0; j < 5; j++) {
-	    var td = document.createElement('TD');
-            if ( j == 0 ) {
-                td.setAttribute("id", "id");
+    } else {
+        for (var i = 0; i < xhrResponse.length; i++) {
+            var tr = document.createElement('TR');
+            table.appendChild(tr);
+            for (var j = 0; j < 5; j++) {
+                var td = document.createElement('TD');
+                if ( j == 0 ) {
+                    td.setAttribute("id", "id");
+                }
+                td.width = '75';
+                td.appendChild(document.createTextNode(xhrResponse[i][j]));
+                tr.appendChild(td);
             }
-            td.width = '75';
-            td.appendChild(document.createTextNode(xhrResponse[i][j]));
-            tr.appendChild(td);
-	}
+        }
     }
     tableDiv.appendChild(table);
 };
