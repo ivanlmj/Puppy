@@ -43,5 +43,12 @@ def f_actions():
     return dumps(actions)
 
 
+@app.route("/logged_actions", method=['GET'])
+def f_logged_actions():
+    db = SQLite()
+    logged_actions = db.logged_actions()
+    return dumps(logged_actions)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
