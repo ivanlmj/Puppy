@@ -39,7 +39,7 @@ def f_panel():
 @app.route("/actions", methods=['GET'])
 def f_actions():
     db = SQLite()
-    actions = db.list_actions()
+    actions = db.actions()
     return dumps(actions)
 
 
