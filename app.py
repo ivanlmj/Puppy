@@ -43,7 +43,7 @@ def f_actions():
     return dumps(actions)
 
 
-@app.route("/logged_actions", method=['GET'])
+@app.route("/logged_actions", methods=['GET'])
 def f_logged_actions():
     db = SQLite()
     logged_actions = db.logged_actions()
