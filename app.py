@@ -35,12 +35,20 @@ def f_login():
 def f_panel():
     return render_template("panel.html")
 
-
-@app.route("/actions", methods=['GET'])
-def f_actions():
+@app.route("/actions", methods=['GET', 'POST'])
+@app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
+def f_actions(id=None):
     db = SQLite()
-    actions = db.actions()
-    return dumps(actions)
+    if id is None:
+        if request.method == "GET":
+            actions = db.actions()
+            return dumps(actions)
+        elif request.method == "POST":
+            name = request.form["name"]
+            action = request.form["action"]
+            db.create_action(name, action)
+    else:
+        """....."""
 
 
 @app.route("/logged_actions", methods=['GET'])
