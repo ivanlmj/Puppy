@@ -35,6 +35,12 @@ def f_login():
 def f_panel():
     return render_template("panel.html")
 
+
+@app.route("/panel/edit", methods=['GET'])
+def f_panel_edit():
+    return render_template("panel_edit.html")
+
+
 @app.route("/actions", methods=['GET', 'POST'])
 @app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 def f_actions(id=None):
