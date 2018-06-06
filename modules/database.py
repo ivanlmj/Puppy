@@ -80,12 +80,17 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
-    def actions(self):
+    def actions(self, action_id=None):
         """
             List actions.
         """
         cursor = self.db.cursor()
-        query = """ SELECT * FROM Actions """
+        query = None
+        if action_id is None
+            query = """ SELECT * FROM Actions """
+        else:
+            query = """ SELECT * FROM Actions
+                        WHERE Id='{0}'""".format(action_id)
         cursor.execute(query)
         data = [ row for row in cursor.fetchall() ]
         self.db.commit()
