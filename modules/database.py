@@ -58,6 +58,9 @@ class SQLite:
     def actions(self, action_id=None):
         """
             List actions.
+
+            Parameters:
+                - action_id (optional): action_id for retrieving specific data
         """
         cursor = self.db.cursor()
         query = None
