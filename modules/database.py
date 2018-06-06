@@ -54,31 +54,6 @@ class SQLite:
         cursor.execute(query)
         self.db.commit()
 
-    def create_action(self, name, action):
-        """
-            Creates a new action.
-
-            Parameters:
-                - name:   action name
-                - action: command that executes the action
-        """
-        cursor = self.db.cursor()
-        query = """ INSERT INTO Actions (Name, Action) VALUES
-                    ('{0}', '{1}') """.format(name, action)
-        cursor.execute(query)
-        self.db.commit()
-
-    def remove_action(self, name):
-        """
-            Removes an action.
-
-            Parameters:
-                - name:   action name
-        """
-        cursor = self.db.cursor()
-        query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
-        cursor.execute(query)
-        self.db.commit()
 
     def actions(self, action_id=None):
         """
@@ -95,6 +70,35 @@ class SQLite:
         data = [ row for row in cursor.fetchall() ]
         self.db.commit()
         return data
+
+
+    def create_action(self, name, action):
+        """
+            Creates a new action.
+
+            Parameters:
+                - name:   action name
+                - action: command that executes the action
+        """
+        cursor = self.db.cursor()
+        query = """ INSERT INTO Actions (Name, Action) VALUES
+                    ('{0}', '{1}') """.format(name, action)
+        cursor.execute(query)
+        self.db.commit()
+
+
+    def remove_action(self, name):
+        """
+            Removes an action.
+
+            Parameters:
+                - name:   action name
+        """
+        cursor = self.db.cursor()
+        query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
+        cursor.execute(query)
+        self.db.commit()
+
 
     def logged_actions(self):
         """
