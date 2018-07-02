@@ -41,6 +41,18 @@ def f_panel_edit():
     return render_template("panel_edit.html")
 
 
+@app.route("/panel/run", methods=['POST'])
+def f_panel_run():
+    if request.method = "POST":
+        db = SQLite()
+        action_id = request.form["action_id"]
+        result = db.run_action(action_id)
+        if result == 0:
+            return "Command OK!"
+        else
+            return "Command not worked..."
+
+
 @app.route("/actions", methods=['GET', 'POST'])
 @app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 def f_actions(id=None):
@@ -54,7 +66,12 @@ def f_actions(id=None):
             action = request.form["action"]
             db.create_action(name, action)
     else:
-        """....."""
+        if request.method == "GET":
+            action = db.actions()
+            return dumps(actions)
+        elif request.method == "PUT":
+        elif request.method == "DELETE":
+
 
 
 @app.route("/logged_actions", methods=['GET'])
