@@ -3,6 +3,7 @@
 from datetime import datetime
 import os.path
 import sqlite3
+import subprocess as sp
 
 class SQLite:
 
@@ -73,6 +74,20 @@ class SQLite:
         data = [ row for row in cursor.fetchall() ]
         self.db.commit()
         return data
+
+
+    def run_action(self, action_id):
+        """
+            Runs an action, based on action_id.
+
+            Parameters:
+                - action_id: action_id for running a specfic action
+        """
+        cursor = self.db.cursor()
+        query = """ SELECT Action FROM Actions
+                    WHERE Id='{0}'""".format(action_id)
+        result = sp.call(query)
+        return result
 
 
     def create_action(self, name, action):
