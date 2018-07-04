@@ -123,7 +123,7 @@ class SQLite:
             List logged actions.
         """
         cursor = self.db.cursor()
-        query = """ SELECT * FROM LogActions """
+        query = """ SELECT * FROM ActionsLog """
         cursor.execute(query)
         data = cursor.fetchall()
         self.db.commit()
