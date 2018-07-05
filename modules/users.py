@@ -22,12 +22,12 @@ class Users:
                 - 1: login unsuccessful
                 - 2: user not found
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query = """ SELECT PassWord FROM Users
                     WHERE UserName='{0}'""".format(username)
         cursor.execute(query)
         data = cursor.fetchone()
-        self.db.commit()
+        self.db.conn.commit()
         if data:
             if password == data[0]:
                 return 0
@@ -46,8 +46,8 @@ class Users:
                 - username
                 - password
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query = """ INSERT INTO Users (FullName, UserName, PassWord) VALUES
              ('{0}', '{1}', '{2}') """.format(fullname, username, password)
         cursor.execute(query)
-        self.db.commit()
+        self.db.conn.commit()

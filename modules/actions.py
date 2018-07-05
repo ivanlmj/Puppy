@@ -17,7 +17,7 @@ class Actions:
             Parameters:
                 - action_id: action_id for running a specfic action
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query_action = """ SELECT Name, Action FROM Actions
                            WHERE Id='{0}'""".format(action_id)
         cursor.execute(query_action)
@@ -29,7 +29,7 @@ class Actions:
             (Name, ReturnCode, RunBy) VALUES
             ('{0}', '{1}', '{2}')""".format(action_name, action_result, User)
             cursor.execute(query_action_log)
-        self.db.commit()
+        self.db.conn.commit()
         return action_result
 
 
@@ -41,11 +41,11 @@ class Actions:
                 - name:   action name
                 - action: command that executes the action
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query = """ INSERT INTO Actions (Name, Action) VALUES
                     ('{0}', '{1}') """.format(name, action)
         cursor.execute(query)
-        self.db.commit()
+        self.db.conn.commit()
 
 
     def remove_action(self, name):
@@ -55,10 +55,10 @@ class Actions:
             Parameters:
                 - name:   action name
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
         cursor.execute(query)
-        self.db.commit()
+        self.db.conn.commit()
 
 
     def list_actions(self, action_id=None):
@@ -68,7 +68,7 @@ class Actions:
             Parameters:
                 - action_id (optional): action_id for retrieving specific data
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query = None
         if action_id is None:
             query = """ SELECT * FROM Actions """
@@ -77,7 +77,7 @@ class Actions:
                         WHERE Id='{0}'""".format(action_id)
         cursor.execute(query)
         data = [ row for row in cursor.fetchall() ]
-        self.db.commit()
+        self.db.conn.commit()
         return data
 
 
@@ -85,9 +85,9 @@ class Actions:
         """
             List logged actions.
         """
-        cursor = self.db.cursor()
+        cursor = self.db.conn.cursor()
         query = """ SELECT * FROM ActionsLog """
         cursor.execute(query)
         data = cursor.fetchall()
-        self.db.commit()
+        self.db.conn.commit()
         return data
