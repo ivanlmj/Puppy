@@ -46,10 +46,20 @@ def run(self):
         users_admin = """ INSERT INTO
         Users (FullName, UserName, Password)
         VALUES ('Administrator', 'root', 'root') """
-        cursor.execute(users)
-        cursor.execute(sessions)
-        cursor.execute(actions)
-        cursor.execute(actions_log)
-        cursor.execute(users_admin)
-        self.db.conn.commit()
+        try:
+            cursor.execute(users)
+            cursor.execute(sessions)
+            cursor.execute(actions)
+            cursor.execute(actions_log)
+            cursor.execute(users_admin)
+            self.db.conn.commit()
+            return 0
+        except Exception as e:
+            return e
+
+if __name__ == "__main__":
+    result = run()
+    if result == 0:
         print("Done!")
+    else:
+        print(result)
