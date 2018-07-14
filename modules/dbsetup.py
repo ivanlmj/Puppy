@@ -43,15 +43,19 @@ def run(self):
         Name TEXT NOT NULL, ReturnCode INT NOT NULL, RunBy TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
-        users_admin = """ INSERT INTO
+        adding_user = """ INSERT INTO
         Users (FullName, UserName, Password)
         VALUES ('Administrator', 'root', 'root') """
+        adding_action = """ INSERT INTO
+        Actions (Name, Action)
+        VALUES ('Test Message', 'echo "Puppy is running" > /tmp/puppy.out') """
         try:
             cursor.execute(users)
             cursor.execute(sessions)
             cursor.execute(actions)
             cursor.execute(actions_log)
-            cursor.execute(users_admin)
+            cursor.execute(adding_user)
+            cursor.execute(adding_action)
             self.db.conn.commit()
             return 0
         except Exception as e:
@@ -60,6 +64,6 @@ def run(self):
 if __name__ == "__main__":
     result = run()
     if result == 0:
-        print("Done!")
+        print("INFO: Successful!")
     else:
-        print(result)
+        print("ERROR:", result)
