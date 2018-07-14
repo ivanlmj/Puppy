@@ -53,6 +53,13 @@ def f_panel_run():
             return "Command not worked..."
 
 
+@app.route("/panel/logged_actions", methods=['GET'])
+def f_logged_actions():
+    db = SQLite()
+    logged_actions = db.logged_actions()
+    return dumps(logged_actions)
+
+
 @app.route("/actions", methods=['GET', 'POST'])
 @app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 def f_actions(id=None):
@@ -71,14 +78,6 @@ def f_actions(id=None):
             return dumps(actions)
         elif request.method == "PUT":
         elif request.method == "DELETE":
-
-
-
-@app.route("/logged_actions", methods=['GET'])
-def f_logged_actions():
-    db = SQLite()
-    logged_actions = db.logged_actions()
-    return dumps(logged_actions)
 
 
 if __name__ == "__main__":
