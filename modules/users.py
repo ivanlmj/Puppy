@@ -37,7 +37,7 @@ class Users:
             return 1
 
 
-    def create_user(self, fullname, username, password):
+    def create(self, fullname, username, password):
         """
             Creates a new user.
 
