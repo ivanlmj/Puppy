@@ -12,7 +12,7 @@ def run():
                 - Actions:    commands exposed as actions
                 - ActionsLog: register of executed actions
         """
-        cursor = self.db.conn.cursor()
+        cursor = db.conn.cursor()
         # cleaning database
         drop_users = """ DROP TABLE IF EXISTS Users """
         drop_sessions = """ DROP TABLE IF EXISTS Sessions """
@@ -56,7 +56,7 @@ def run():
             cursor.execute(actions_log)
             cursor.execute(adding_user)
             cursor.execute(adding_action)
-            self.db.conn.commit()
+            db.conn.commit()
             return 0
         except Exception as e:
             return e
