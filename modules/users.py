@@ -51,3 +51,16 @@ class Users:
              ('{0}', '{1}', '{2}') """.format(fullname, username, password)
         cursor.execute(query)
         self.db.conn.commit()
+
+
+    def remove(self, username):
+        """
+            Removes an user.
+
+            Parameters:
+                - username
+        """
+        cursor = self.db.conn.cursor()
+        query = """ DELETE FROM Users WHERE UserName='{0}'""".format(username)
+        cursor.execute(query)
+        self.db.conn.commit()
