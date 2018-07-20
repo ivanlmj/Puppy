@@ -4,7 +4,7 @@ import database
 
 db = database.SQLite()
 
-def run(self):
+def run():
         """
             Creates tables for initial database setup:
                 - Users:      user management
