@@ -2,7 +2,7 @@
 
 import database
 
-class Users:
+class User:
 
 
     def __init__(self):
