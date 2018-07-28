@@ -10,7 +10,7 @@ class Actions:
         self.db = database.SQLite()
 
 
-    def run_action(self, action_id, user):
+    def run(self, action_id, user):
         """
             Runs an action, based on action_id.
 
@@ -33,7 +33,7 @@ class Actions:
         return action_result
 
 
-    def create_action(self, name, action):
+    def create(self, name, action):
         """
             Creates a new action.
 
@@ -48,7 +48,7 @@ class Actions:
         self.db.conn.commit()
 
 
-    def remove_action(self, name):
+    def remove(self, name):
         """
             Removes an action.
 
@@ -61,7 +61,7 @@ class Actions:
         self.db.conn.commit()
 
 
-    def list_actions(self, action_id=None):
+    def show(self, action_id=None):
         """
             List actions.
 
@@ -81,7 +81,7 @@ class Actions:
         return data
 
 
-    def logged_actions(self):
+    def logged(self):
         """
             List logged actions.
         """
