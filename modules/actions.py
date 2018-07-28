@@ -63,7 +63,7 @@ class Actions:
 
     def show(self, action_id=None):
         """
-            List actions.
+         Shows actions as JSON document.
 
             Parameters:
                 - action_id (optional): action_id for retrieving specific data
