@@ -15,3 +15,7 @@ class Probe(unittest.TestCase):
 
     def test_user_remove(self):
         self.assertEqual(user.remove("nemo"), 0)
+
+
+if __name__ == "__main__":
+    unittest.main()
