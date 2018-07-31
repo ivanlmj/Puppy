@@ -47,7 +47,7 @@ class Actions:
             if action_result == 0:
                 query_action_log  = """ INSERT INTO ActionsLog
                 (Name, ReturnCode, RunBy) VALUES('{0}', '{1}', '{2}')
-                """.format(action_name, action_result, User)
+                """.format(action_name, action_result, user)
                 cursor.execute(query_action_log)
                 self.db.conn.commit()
                 return 0
