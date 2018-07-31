@@ -3,7 +3,7 @@
 import database
 import subprocess as sp
 
-class Actions:
+class Action:
 
 
     def __init__(self):
