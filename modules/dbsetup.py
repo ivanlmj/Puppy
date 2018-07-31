@@ -46,16 +46,12 @@ def run():
         adding_user = """ INSERT INTO
         Users (FullName, UserName, Password)
         VALUES ('Administrator', 'root', 'root') """
-        adding_action = """ INSERT INTO
-        Actions (Name, Action)
-        VALUES ('Test Message', 'echo "Puppy is running" > /tmp/puppy.out') """
         try:
             cursor.execute(users)
             cursor.execute(sessions)
             cursor.execute(actions)
             cursor.execute(actions_log)
             cursor.execute(adding_user)
-            cursor.execute(adding_action)
             db.conn.commit()
             return 0
         except Exception as e:
