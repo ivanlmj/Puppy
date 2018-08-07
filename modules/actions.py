@@ -41,13 +41,15 @@ class Action:
             query_action = """ SELECT Name, Action FROM Actions
                                WHERE Id='{0}'""".format(action_id)
             cursor.execute(query_action)
-            action_data   = cursor.fetchall()
-            action_name   = action_data[0]
-            action_result = sp.call(action_data[1])
-            if action_result == 0:
+            action_data = cursor.fetchall()[0]
+            self.db.conn.commit()
+            action  = action_data[0]
+            command = action_data[1]
+            result  = sp.call(command.split())
+            if result == 0:
                 query_action_log  = """ INSERT INTO ActionsLog
                 (Name, ReturnCode, RunBy) VALUES('{0}', '{1}', '{2}')
-                """.format(action_name, action_result, user)
+                """.format(action, result, user)
                 cursor.execute(query_action_log)
                 self.db.conn.commit()
                 return 0
