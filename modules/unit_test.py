@@ -13,36 +13,36 @@ class Probe(unittest.TestCase):
     """ Probing functionalities from Puppy. """
     
     # User() class test
-    def test_user_create(self):
+    def test_1_user_create(self):
         """ Testing user ceation. """
         self.assertEqual(user.create("Captain Nemo", "nemo", "nemo2000"), 0)
 
-    def test_user_login(self):
+    def test_2_user_login(self):
         """ Testing user login. """
         self.assertEqual(user.login("nemo", "nemo2000"), 0)
 
-    def test_user_remove(self):
+    def test_3_user_remove(self):
         """ Testing user removal. """
         self.assertEqual(user.remove("nemo"), 0)
 
     # Action() class test
-    def test_action_create(self):
+    def test_4_action_create(self):
         """ Testing action creation. """
         self.assertEqual(action.create("Create File", "touch /tmp/file"), 0)
 
-    def test_action_run(self):
+    def test_5_action_run(self):
         """ Testing action execution. """
         self.assertEqual(action.run(1, "root"), 0)
 
-    def test_action_show(self):
+    def test_6_action_show(self):
         """ Testing display of actions. """
         self.assertEqual(type(action.show()), list)
 
-    def test_action_logged(self):
+    def test_7_action_logged(self):
         """ Testing display of logged actions. """
         self.assertEqual(type(action.logged()), list)
 
-    def test_action_remove(self):
+    def test_8_action_remove(self):
         """ Testing action removal. """
         self.assertEqual(action.remove("Create File"), 0)
 
