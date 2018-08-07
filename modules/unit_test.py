@@ -32,7 +32,7 @@ class Probe(unittest.TestCase):
 
     def test_action_run(self):
         """ Testing action execution. """
-        self.assertEqual(action.run(0, "root"), 0)
+        self.assertEqual(action.run(1, "root"), 0)
 
     def test_action_show(self):
         """ Testing display of actions. """
@@ -44,7 +44,7 @@ class Probe(unittest.TestCase):
 
     def test_action_remove(self):
         """ Testing action removal. """
-        self.assertEqual(action.remove(), 0)
+        self.assertEqual(action.remove("Create File"), 0)
 
 if __name__ == "__main__":
     unittest.main()
