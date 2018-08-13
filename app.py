@@ -3,7 +3,9 @@
 
 from flask import Flask, redirect, render_template, request
 from json import dumps
-from modules.database import SQLite
+
+from modules import actions
+from modules import users
 
 __author__ = "@ivanleoncz"
 
@@ -22,8 +24,8 @@ def f_login():
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        db = SQLite()
-        status = db.login(username, password)
+        user = users.User()
+        status = user.login(username, password)
         if status == 0:
             return redirect("/panel")
         else:
@@ -44,9 +46,10 @@ def f_panel_edit():
 @app.route("/panel/run", methods=['POST'])
 def f_panel_run():
     if request.method = "POST":
-        db = SQLite()
         action_id = request.form["action_id"]
-        result = db.run_action(action_id)
+        username = request.cookies.get('username')
+        action = actions.Action()
+        result = action.run(action_id, username)
         if result == 0:
             return "Command OK!"
         else
@@ -55,26 +58,26 @@ def f_panel_run():
 
 @app.route("/panel/logged_actions", methods=['GET'])
 def f_logged_actions():
-    db = SQLite()
-    logged_actions = db.logged_actions()
+    action = actions.Action()
+    logged_actions = action.logged()
     return dumps(logged_actions)
 
 
 @app.route("/actions", methods=['GET', 'POST'])
 @app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 def f_actions(id=None):
-    db = SQLite()
+    action = actions.Action()
     if id is None:
         if request.method == "GET":
-            actions = db.actions()
+            actions = action.show()
             return dumps(actions)
         elif request.method == "POST":
             name = request.form["name"]
             action = request.form["action"]
-            db.create_action(name, action)
+            action.create(name, action)
     else:
         if request.method == "GET":
-            action = db.actions()
+            actions = action.show()
             return dumps(actions)
         elif request.method == "PUT":
         elif request.method == "DELETE":
