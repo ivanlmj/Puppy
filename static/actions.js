@@ -1,3 +1,9 @@
+// Function executed as Callback, after finishing ajax* request (ajax.js)
+//
+// Definition: processes request data as JSON format, parsing elements for
+// building <select> element (list actions)
+//
+
 function buildSelect(data) {
     var xhrResponse = JSON.parse(data);
 

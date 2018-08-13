@@ -1,3 +1,9 @@
+// Function executed as Callback, after finishing ajax* request (ajax.js)
+//
+// Definition: processes request data as JSON format, parsing elements for
+// building <table> element (list of logged actions)
+//
+
 function buildTable(data) {
     var xhrResponse = JSON.parse(data);
 
