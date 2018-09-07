@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import database
+from . import database
 import subprocess as sp
 
 class Action:
