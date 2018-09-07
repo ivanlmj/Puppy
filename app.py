@@ -45,14 +45,14 @@ def f_panel_edit():
 
 @app.route("/panel/run", methods=['POST'])
 def f_panel_run():
-    if request.method = "POST":
+    if request.method == "POST":
         action_id = request.form["action_id"]
         username = request.cookies.get('username')
         action = actions.Action()
         result = action.run(action_id, username)
         if result == 0:
             return "Command OK!"
-        else
+        else:
             return "Command not worked..."
 
 
@@ -80,8 +80,9 @@ def f_actions(id=None):
             actions = action.show()
             return dumps(actions)
         elif request.method == "PUT":
+            return "501: Not Implemented", 501
         elif request.method == "DELETE":
-
+            return "501: Not Implemented", 501
 
 if __name__ == "__main__":
     app.run(debug=True)
