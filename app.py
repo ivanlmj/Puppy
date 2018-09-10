@@ -70,32 +70,6 @@ def f_logged_actions():
     logged_actions = action.logged()
     return dumps(logged_actions)
 
-'''
-    INFO: route /actions causes conflict with module name "actions"
-
-    Temporarily disabled!
-
-@app.route("/actions", methods=['GET', 'POST'])
-@app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
-def f_actions(id=None):
-    action = actions.Action()
-    if id is None:
-        if request.method == "GET":
-            actions = action.show()
-            return dumps(actions)
-        elif request.method == "POST":
-            name = request.form["name"]
-            action = request.form["action"]
-            action.create(name, action)
-    else:
-        if request.method == "GET":
-            actions = action.show()
-            return dumps(actions)
-        elif request.method == "PUT":
-            return "501: Not Implemented", 501
-        elif request.method == "DELETE":
-            return "501: Not Implemented", 501
-'''
 
 
 if __name__ == "__main__":
