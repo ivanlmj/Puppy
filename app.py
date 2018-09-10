@@ -29,6 +29,7 @@ def f_login():
         if status == 0:
             return redirect("/panel")
         else:
+            print("Status:", status)
             message = "Check Username and Password."
             return render_template("login.html", login_status=message)
 
@@ -62,6 +63,10 @@ def f_logged_actions():
     logged_actions = action.logged()
     return dumps(logged_actions)
 
+'''
+    INFO: route /actions causes conflict with module name "actions"
+
+    Temporarily disabled!
 
 @app.route("/actions", methods=['GET', 'POST'])
 @app.route("/actions/<int:id>", methods=['GET', 'PUT', 'DELETE'])
@@ -83,6 +88,8 @@ def f_actions(id=None):
             return "501: Not Implemented", 501
         elif request.method == "DELETE":
             return "501: Not Implemented", 501
+'''
+
 
 if __name__ == "__main__":
     app.run(debug=True)
