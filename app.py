@@ -64,11 +64,11 @@ def f_actions():
     return dumps(load_actions)
 
 
-@app.route("/panel/logged_actions", methods=['GET'])
+@app.route("/panel/actions/logged", methods=['GET'])
 def f_logged_actions():
     action = actions.Action()
-    logged_actions = action.logged()
-    return dumps(logged_actions)
+    logged = action.logged()
+    return dumps(logged)
 
 
 
