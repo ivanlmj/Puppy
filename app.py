@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 
-from flask import Flask, redirect, render_template, request
+from flask import Flask, make_response, redirect, render_template, request
 from json import dumps
 
 from modules import actions
@@ -60,10 +60,9 @@ def f_panel_run():
         username = request.cookies.get('username')
         action = actions.Action()
         result = action.run(action_id, username)
-        if result == 0:
-            return "Command OK!"
-        else:
-            return "Command not worked..."
+        response = make_response(redirect('/panel'))
+        response.set_cookie('last_action_status', str(result))
+        return response
 
 
 @app.route("/panel/actions", methods=['GET'])
