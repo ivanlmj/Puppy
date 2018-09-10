@@ -57,6 +57,13 @@ def f_panel_run():
             return "Command not worked..."
 
 
+@app.route("/panel/actions", methods=['GET'])
+def f_actions():
+    action = actions.Action()
+    load_actions = action.show()
+    return dumps(load_actions)
+
+
 @app.route("/panel/logged_actions", methods=['GET'])
 def f_logged_actions():
     action = actions.Action()
