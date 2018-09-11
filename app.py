@@ -36,7 +36,9 @@ def f_login():
         user = users.User()
         status = user.login(username, password)
         if status == 0:
-            return redirect("/panel")
+            response = make_response(redirect('/panel'))
+            response.set_cookie('username', username)
+            return response
         else:
             print("Status:", status)
             message = "Check Username and Password."
