@@ -29,7 +29,7 @@ class Action:
             return e
 
 
-    def remove(self, name):
+    def delete(self, name):
         """
             Removes an action.
 
