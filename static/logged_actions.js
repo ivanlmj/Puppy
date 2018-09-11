@@ -6,7 +6,6 @@
 
 function buildTable(data) {
     var xhrResponse = JSON.parse(data);
-    console.log(xhrResponse);
 
     var tableDiv = document.getElementById("actions");
     var table = document.createElement('TABLE');
