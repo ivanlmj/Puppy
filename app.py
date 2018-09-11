@@ -50,20 +50,34 @@ def f_panel():
     return render_template("panel.html")
 
 
-@app.route("/panel/edit", methods=['GET'])
-def f_panel_edit():
-    return render_template("panel_edit.html")
-
-
-@app.route("/panel/action/run", methods=['POST'])
-def f_panel_run():
-    if request.method == "POST":
-        action_id = request.form["action_id"]
-        username = request.cookies.get('username')
-        action = actions.Action()
-        result = action.run(action_id, username)
+@app.route("/panel/action/<option>", methods=['GET', 'POST'])
+def f_panel_action(option):
+    if request.method == "GET":
+        return render_template("action.html")
+    elif request.method == "POST":
         response = make_response(redirect('/panel'))
-        response.set_cookie('last_action_status', str(result))
+        action_obj = actions.Action()
+        if option == "run":
+            action_id = request.form["action_id"]
+            username = request.cookies.get('username')
+            result = action_obj.run(action_id, username)
+            response.set_cookie('run_status', str(result))
+        elif option == "create":
+            name = request.form["name"]
+            action = request.form["action"]
+            result = action_obj.create(name, action)
+            response.set_cookie('create_status', str(result))
+        elif option == "update":
+            action_id = request.form["id"]
+            name = request.form["name"]
+            action = request.form["action"]
+            result = action_obj.update(action_id, name, action)
+            response.set_cookie('update_status', str(result))
+        elif option == "delete":
+            action_id = request.form["id"]
+            result = action_obj.delete(action_id)
+            response.set_cookie('delete_status', str(result))
+
         return response
 
 
