@@ -29,6 +29,24 @@ class Action:
             return e
 
 
+    def update(self, action_id, name, action):
+        """
+            Updates an existent action.
+
+            Parameters:
+                - action_id: id of the action that should be updated
+        """
+        try:
+            cursor = self.db.conn.cursor()
+            query = """ UPDATE Actions SET Name={0}, Action={1}
+                        WHERE Id = {2}""".format(name, action, action_id)
+            cursor.execute(query)
+            self.db.conn.commit()
+            return 0
+        except Exception as e:
+            return e
+
+
     def delete(self, name):
         """
             Removes an action.
