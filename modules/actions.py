@@ -29,6 +29,30 @@ class Action:
             return e
 
 
+    def remove(self, name):
+        """
+            Removes an action.
+
+            Parameters:
+                - name:   action name
+        """
+        try:
+            cursor = self.db.conn.cursor()
+            query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
+            cursor.execute(query)
+            self.db.conn.commit()
+            query_remove = """ SELECT * FROM Actions
+                               WHERE Name='{0}'""".format(name)
+            cursor.execute(query_remove)
+            data = cursor.fetchall()
+            if len(data) == 0:
+                return 0
+            else:
+                return 1
+        except Exception as e:
+            return e
+
+
     def run(self, action_id, user):
         """
             Runs an action, based on action_id.
@@ -97,25 +121,3 @@ class Action:
             return e
 
 
-    def remove(self, name):
-        """
-            Removes an action.
-
-            Parameters:
-                - name:   action name
-        """
-        try:
-            cursor = self.db.conn.cursor()
-            query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
-            cursor.execute(query)
-            self.db.conn.commit()
-            query_remove = """ SELECT * FROM Actions
-                               WHERE Name='{0}'""".format(name)
-            cursor.execute(query_remove)
-            data = cursor.fetchall()
-            if len(data) == 0:
-                return 0
-            else:
-                return 1
-        except Exception as e:
-            return e
