@@ -55,7 +55,7 @@ def f_panel_edit():
     return render_template("panel_edit.html")
 
 
-@app.route("/panel/run", methods=['POST'])
+@app.route("/panel/action/run", methods=['POST'])
 def f_panel_run():
     if request.method == "POST":
         action_id = request.form["action_id"]
