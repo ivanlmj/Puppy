@@ -20,7 +20,6 @@
 	    #id { width: 5%; }
 	</style>
 
-	<script src="/static/action_status.js"></script>
 
     </head>
 
@@ -39,12 +38,23 @@
 	<div id="actions">
 	</div>
 
+	<script src="/static/action_status.js"></script>
 	<script src="/static/actions.js"></script>
 	<script src="/static/logged_actions.js"></script>
 	<script src="/static/ajax.js"></script>
 	<script>
-		ajaxGet("/panel/actions", buildSelect)
+		// builds <select> box for available Actions
+		ajaxGet("/panel/actions", buildSelect);
+		// builds <table> for logged Actions
 		ajaxGet("/panel/actions/logged", buildTable);
+		/*
+		   Performs cookie verification, based on the operation:
+			-> /panel/action/run
+			-> /panel/action/create
+			-> /panel/action/update
+			-> /panel/action/delete
+		 */
+		actionStatus();
 	</script>
     </body>
 
