@@ -1,12 +1,12 @@
 function actionStatus() {
 
     // storing cookie data into variable
+    // cookies are set on demand, deppending on /path/action/<option> request
     var cookies = document.cookie.split(";");
-    // cleaning specific cookie from browser, for it must only be present
-    // after the execution of an action
 
     cookies.forEach(function(element) {
-	console.log("Element:", element);
+	// after the evaluation of the cookie_key, the value is evaluated
+	// and the specific cookie is cleaned
 
         data = element.split("=");
 	cookie_key = data[0].trim()
@@ -50,5 +50,3 @@ function actionStatus() {
     });
     
 }
-
-actionStatus();
