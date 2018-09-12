@@ -8,13 +8,35 @@
 
 	<style type="text/css">
             * { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; }
-	    body { padding-left: 10px; padding-top: 30px}
+
+	    html, body {
+		height: 100%;
+	    }
+
+	    body {
+		margin: 0;
+            }
+
+	    #left_panel  {
+                height: 100%;
+                width: 15%;
+                margin-right: 20px;
+                float: left;
+                background-color: #4CAF50;
+	    }
+
+	    #right_panel {
+		float: left;
+	    }
+
+	    img { margin-top: 20px; }
+
 	    #select_action { margin-top: 10px; }
 	    table, th, td {
 		text-align: center;
 		border-collapse: collapse;
 	    }
-	    table { width: 70%; border: 1px solid black; margin-top: 25px; }
+	    table { width: 100%; border: 1px solid black; margin-top: 25px; }
 
 	    thead { width: 100%; display: block; background-color: #4CAF50; }
 	    thead th { height: 25px; width: 200px; background-color: #4CAF50; color: white; font-weight: bold; }
@@ -28,24 +50,32 @@
     </head>
 
     <body>
-	<img src="/static/Shell-WA.png" alt="Shell-WA"></img>
-	<div id="select_action">
-	  <form action="/panel/action/run" method="post">
-	      <select id="action" name="action_id">
-		<option selected> Select Action... </option>
-		<!-- <option>s are added dinamically (actions.js) -->
-	      </select>
-	      <input type="submit" value="Run">
-	  </form>
+
+	<div id="left_panel">
 	</div>
 
-	<div id="actions">
+	<div id="right_panel">
+
+	  <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
+	  <div id="select_action">
+	    <form action="/panel/action/run" method="post">
+	        <select id="action" name="action_id">
+		  <option selected> Select Action... </option>
+		  <!-- <option>s are added dinamically (actions.js) -->
+	        </select>
+	        <input type="submit" value="Run">
+	    </form>
+	  </div>
+
+	  <div id="actions">
 	    <table>
 		<thead id="t_head">
 		</thead>
 		<tbody id="t_body">
 		</tbody>
 	    </table>
+	  </div>
+
 	</div>
 
 	<script src="/static/action_status.js"></script>
