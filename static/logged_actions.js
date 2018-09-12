@@ -7,15 +7,20 @@
 function buildTable(data) {
     var xhrResponse = JSON.parse(data);
 
-    var tableDiv = document.getElementById("actions");
-    var table = document.createElement('TABLE');
+    // building table header
+    var tableHead = document.getElementById("t_head");
+
+    // - creating header row
     var header = document.createElement('TR');
 
+    // - creating headers
     var id = document.createElement('TH');
     var action = document.createElement('TH');
     var command = document.createElement('TH');
     var run_by = document.createElement('TH');
     var run_time = document.createElement('TH');
+
+    // - creating headers (text and appending)
     id.appendChild(document.createTextNode("Id"));
     action.appendChild(document.createTextNode("Action"));
     command.appendChild(document.createTextNode("Status"));
@@ -26,20 +31,27 @@ function buildTable(data) {
     header.appendChild(command);
     header.appendChild(run_by);
     header.appendChild(run_time);
-    table.appendChild(header);
+
+    // - append header row to table head
+    tableHead.appendChild(header);
+
+    // building table body
+    var tableBody = document.getElementById("t_body");
 
     if (xhrResponse.length == 0) {
+	// if no response from AJAX request
 	var message = "No actions have been performed yet.";
         var tr = document.createElement('TR');
 	var td = document.createElement('TD');
 	td.colSpan = 5;
 	td.appendChild(document.createTextNode(message));
 	tr.appendChild(td);
-	table.appendChild(tr);
+	tableBody.appendChild(tr);
     } else {
+	// parsing response (JSON) from AJAX request
         for (var i = 0; i < xhrResponse.length; i++) {
             var tr = document.createElement('TR');
-            table.appendChild(tr);
+            //tableBody.appendChild(tr);
             for (var j = 0; j < 5; j++) {
                 var td = document.createElement('TD');
                 if ( j == 0 ) {
@@ -48,8 +60,9 @@ function buildTable(data) {
                 td.width = '75';
                 td.appendChild(document.createTextNode(xhrResponse[i][j]));
                 tr.appendChild(td);
+		tableBody.appendChild(tr);
             }
         }
     }
-    tableDiv.appendChild(table);
+
 };
