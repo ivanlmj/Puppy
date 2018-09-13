@@ -19,8 +19,8 @@
 
 	    #left_panel  {
                 height: 100%;
-                width: 15%;
-                margin-right: 20px;
+                width: 17%;
+                margin-right: 25px;
                 float: left;
                 background-color: #4CAF50;
 	    }
@@ -29,21 +29,52 @@
 		float: left;
 	    }
 
-	    img { margin-top: 20px; }
+	    img {
+		    margin-top: 30px;
+                    margin-left: 10px;
+		    width: 200px;
+	    }
 
-	    #select_action { margin-top: 10px; }
-	    table, th, td {
+	    #menu {
+		margin-top: 50px;
+		height: 10%;
+		width: 100%;
+		border: 0px solid white;
+	    }
+
+	    #menu tbody {
+		height: 0%;
+	    }
+
+
+	    #select_action { margin-top: 55px; }
+
+	    #logged_actions { width: 100%; border: 1px solid black; margin-top: 25px; }
+
+	    #logged_actions, th, td {
 		text-align: center;
 		border-collapse: collapse;
 	    }
-	    table { width: 100%; border: 1px solid black; margin-top: 25px; }
 
 	    thead { width: 100%; display: block; background-color: #4CAF50; }
-	    thead th { height: 25px; width: 200px; background-color: #4CAF50; color: white; font-weight: bold; }
+	    thead th { height: 30px; width: 200px; background-color: #4CAF50; color: white; font-weight: bold; }
 
 	    tbody { width: 100%; height: 270px; display: block; overflow: auto; }
 	    tbody td { height: 25px; width: 15%; }
-	    tr:nth-child(even) { background-color: #f2f2f2 }
+	    tbody tr:nth-child(even) { background-color: #f2f2f2; }
+
+	    #menu tr {
+		background-color: #f2f2f2;
+		border-spacing: 0px;
+	    }
+
+	    #menu td {
+	        text-align: left;
+		padding-left: 10px;
+		border: 1px solid white;
+		border-collapse: collapse;
+	    }
+
 	</style>
 
 
@@ -52,11 +83,24 @@
     <body>
 
 	<div id="left_panel">
+	    <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
+	    <table id="menu">
+	      <tbody>
+                <tr>
+		    <td> <a href="#"> </a> Actions </td>
+		</tr>
+                <tr>
+		    <td> <a href="#"> </a> System </td>
+		</tr>
+                <tr>
+		    <td> <a href="#"> </a> Logout </td>
+		</tr>
+	      </tbody>
+            </table>
 	</div>
 
 	<div id="right_panel">
 
-	  <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
 	  <div id="select_action">
 	    <form action="/panel/action/run" method="post">
 	        <select id="action" name="action_id">
@@ -68,7 +112,7 @@
 	  </div>
 
 	  <div id="actions">
-	    <table>
+	    <table id="logged_actions">
 		<thead id="t_head">
 		</thead>
 		<tbody id="t_body">
