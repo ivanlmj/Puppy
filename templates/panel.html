@@ -3,7 +3,7 @@
 
     <head>
 
-        <title> Puppy </title>
+        <title> Shell-WA Panel </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<style type="text/css">
@@ -11,14 +11,37 @@
 
 	    html, body {
 		height: 100%;
+		margin: 0;
 	    }
 
-	    body {
-		margin: 0;
-            }
+
+	    #upper_bar {
+		height: 30px;
+		width: 100%;
+		background-color: #4CAF50;
+	    }
+
+	    #upper_bar table {
+		width: 100%;
+		border-collapse: collapse;
+		border: 0px;
+	    }
+
+
+	    #upper_bar #logout {
+		text-align: right;
+		padding-top: 5px;
+		padding-right: 10px;
+		font-weight: bold;
+	    }
+
+	    #upper_bar #logout a {
+		text-decoration: none;
+		color: white;
+	    }
 
 	    #left_panel  {
-                height: 100%;
+                height: 80%;
                 width: 17%;
                 margin-right: 25px;
                 float: left;
@@ -29,14 +52,20 @@
 		float: left;
 	    }
 
+	    #logo {
+		height: 25%;
+		width: 100%;
+		background-color: white;
+	    }
+
 	    img {
-		    margin-top: 30px;
-                    margin-left: 10px;
-		    width: 200px;
+		margin-top: 40px;
+		margin-left: 10px;
+		width: 200px;
 	    }
 
 	    #menu {
-		margin-top: 51px;
+		margin-top: 30px;
 		height: 10%;
 		width: 100%;
 		border: 0px solid white;
@@ -57,19 +86,23 @@
 		padding-left: 10px;
 		border: 1px solid #f2f2f2;
 		border-collapse: collapse;
+		color: #8c8c8c;
 	    }
 
 	    #menu td:hover {
-		color: white;
-		background-color: #cccccc;
+		background-color: #b3b3b3;
 	    }
 
 	    #menu a {
-		color: black;
+		color: #666666;
 		text-decoration: none;
 	    }
 
-	    #select_action { margin-top: 55px; }
+	    #menu a:hover {
+		color: white;
+	    }
+
+	    #select_action { margin-top: 60px; }
 
 	    #logged_actions { width: 100%; border: 1px solid black; margin-top: 25px; }
 
@@ -80,11 +113,28 @@
 
 	    #logged_actions thead { width: 100%; display: block; background-color: #4CAF50; }
 	    #logged_actions thead th { height: 30px; width: 200px; background-color: #4CAF50;
-		       color: white; font-weight: bold; }
+		                        color: white; font-weight: bold; }
 
 	    #logged_actions tbody { width: 100%; height: 320px; display: block; overflow: auto; }
-	    #logged_actions tbody td { height: 30px; width: 15%; }
+	    #logged_actions tbody td { height: 30px; width: 15%; color: #666666}
 	    #logged_actions tbody tr:nth-child(even) { background-color: #f2f2f2; }
+
+	    #right_footer {
+		position: absolute;
+		right: 10px;
+		font-size: 12px;
+		bottom: 10px;
+	    }
+
+	    #right_footer a {
+		text-decoration: none;
+		color: black;
+		font-weight: bold;
+	    }
+
+	    #right_footer a:hover {
+		color: blue;
+	    }
 
 
 	</style>
@@ -94,8 +144,21 @@
 
     <body>
 
+	<div id="upper_bar">
+	  <table>
+	    <tr>
+	      <td></td>
+	      <td id="logout"><a href="#">Logout</a></td>
+            </tr>
+	  </table>
+	</div>
+
 	<div id="left_panel">
-	    <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
+
+	    <div id="logo">
+	      <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
+	    </div>
+
 	    <table id="menu">
 	      <tbody>
                 <tr>
@@ -112,6 +175,7 @@
 		</tr>
 	      </tbody>
             </table>
+
 	</div>
 
 	<div id="right_panel">
@@ -136,6 +200,7 @@
 	  </div>
 
 	</div>
+	<p id="right_footer">Fork me on <a href="#">GitHub</a></p>
 
 	<script src="/static/action_status.js"></script>
 	<script src="/static/actions.js"></script>
