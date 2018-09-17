@@ -1,0 +1,41 @@
+{% extends "template.html"  %}
+{% block head %} 
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+  {{ super() }}
+  <div>
+    <form action="/registry" name="form_user"                                   
+          method="post" enctype="multipart/form-data"                           
+          onsubmit="return validateForm();">                                    
+        <table>                                                                 
+          <tr>                                                                  
+            <td>Name:</td>                                                      
+            <td><input type="text" name="name"></input></td>                    
+          </tr>                                                                 
+          <tr>                                                                  
+            <td>Birthdate:</td>                                                 
+            <td><input type="text" name="birthdate"></input></td>               
+          </tr>                                                                 
+          <tr>                                                                  
+            <td>Profession:</td>                                                
+            <td><input type="text" name="profession"></input></td>              
+          </tr>                                                                 
+          <tr>                                                                  
+            <td>E-Mail:</td>                                                    
+            <td><input type="text" name="email"></input></td>                   
+          </tr>                                                                 
+          <tr>                                                                  
+            <td>Country:</td>                                                   
+            <td><input type="text" name="country"></input></td>                 
+          </tr>                                                                 
+          <tr>                                                                  
+            <td>Resume:</td>                                                    
+            <td><input type="file" name="resume"></input></td>                  
+          </tr>                                                                 
+        </table>                                                                 
+        <input type="submit" value="Send">                                      
+    </form> 
+  </div>
+{% endblock %}
