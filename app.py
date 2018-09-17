@@ -50,11 +50,15 @@ def f_panel():
     return render_template("panel.html")
 
 
-@app.route("/panel/action/<option>", methods=['GET', 'POST'])
-def f_panel_action(option):
+@app.route("/panel/action", methods=['GET'])
+def f_action():
     if request.method == "GET":
         return render_template("action.html")
-    elif request.method == "POST":
+
+
+@app.route("/panel/action/<option>", methods=['POST'])
+def f_panel_action(option):
+    if request.method == "POST":
         response = make_response(redirect('/panel'))
         action_obj = actions.Action()
         if option == "run":
