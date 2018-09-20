@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+    	{% block head %}
+	<title> Shell-WA Panel </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style type="text/css">
+
+            * { 
+		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	    }
+
+	    html, body {
+		height: 100%;
+		margin: 0;
+	    }
+	    
+	    #upper_bar {
+		height: 7%;
+		width: 100%;
+		background-color: #4CAF50;
+	    }
+
+	    #upper_bar table {
+		height: 100%;
+		width: 100%;
+		border: 0px;
+		border-collapse: collapse;
+	    }
+
+	    #upper_bar table #logout {
+		height: 100%;
+		width: 80px;
+		text-align: center;
+		font-weight: bold;
+	    }
+
+	    #upper_bar table #logout:hover {
+		background-color: #71c174;
+	    }
+
+
+	    #left_panel  {
+                height: 93%;
+                width: 17%;
+                margin-right: 25px;
+                float: left;
+                background-color: #4CAF50;
+	    }
+
+	    #logo {
+		height: 15%;
+		width: 100%;
+		padding-top: 25px;
+		padding-left: 15px;
+		background-color: white;
+	    }
+
+	    img {
+		width: 200px;
+	    }
+
+	    #menu {
+		height: 10%;
+		width: 100%;
+		margin-top: 20px;
+		border-spacing: 0px;
+	    }
+
+	    #menu tbody {
+		height: 0%;
+	    }
+
+	    #menu td {
+		height: 30px;
+		padding-left: 15px;
+	        text-align: left;
+		border-collapse: collapse;
+	    }
+
+	    #menu td:hover {
+		background-color: #71c174;
+	    }
+
+	    a {
+		color: white;
+		font-weight: bold;
+		text-decoration: none;
+	    }
+
+	    a:hover {
+		color: #e6e6e6;
+		font-weight: bold;
+	    }
+
+	    #right_panel {
+		float: left;
+	    }
+
+            #right_footer {                                                     
+                position: fixed;                                             
+                bottom: 10px;                                                   
+                right: 10px;                                                    
+                font-size: 12px;                                                
+            }                                                                   
+                                                                                
+            #right_footer a {                                                   
+                color: black;                                                   
+                font-weight: bold;                                              
+                text-decoration: none;                                          
+            }                                                                   
+                                                                                
+            #right_footer a:hover {                                             
+                color: blue;                                                    
+            }
+
+	</style>	
+	{% endblock %}
+
+    </head>
+
+    <body>
+
+	{% block body %}
+	<div id="upper_bar">
+	  <table>
+	    <tr>
+	      <td></td>
+	      <td id="logout"> <a href="#">Logout</a> </td>
+            </tr>
+	  </table>
+	</div>
+
+	<div id="left_panel">
+	  <div id="logo">
+	    <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
+	  </div>
+
+	  <table id="menu">
+	    <tbody>
+              <tr>
+	        <td> <a href="#"> Panel </a> </td>
+              </tr>
+              <tr>
+                <td> <a href="#"> Actions </a> </td>
+              </tr>
+              <tr>
+                 <td> <a href="#"> System </a> </td>
+	      </tr>
+              <tr>
+	        <td> <a href="#"> Logout </a> </td>
+	      </tr>
+	    </tbody>
+          </table>
+	</div>
+
+	<div id="right_panel">
+	</div>
+
+	<p id="right_footer"><a href="https://github.com/ivanlmj/Shell-WA">Fork me!</a></p>
+	{% endblock %}
+    </body>
+
+</html>
