@@ -1,41 +1,45 @@
-{% extends "template.html"  %}
+{% extends "template.html" %}
 {% block head %} 
   {{ super() }}
+  <style type="text/css">
+    #right_panel {
+	float: left;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+
+    #btn_create {
+	margin-top: 20px;
+    }
+  </style>
 {% endblock %}
 
 {% block body %}
   {{ super() }}
-  <div>
+  <div id="right_panel">
+    <h1> Action </h1>
     <form action="/registry" name="form_user"                                   
           method="post" enctype="multipart/form-data"                           
-          onsubmit="return validateForm();">                                    
-        <table>                                                                 
-          <tr>                                                                  
-            <td>Name:</td>                                                      
-            <td><input type="text" name="name"></input></td>                    
-          </tr>                                                                 
-          <tr>                                                                  
-            <td>Birthdate:</td>                                                 
-            <td><input type="text" name="birthdate"></input></td>               
-          </tr>                                                                 
-          <tr>                                                                  
-            <td>Profession:</td>                                                
-            <td><input type="text" name="profession"></input></td>              
-          </tr>                                                                 
-          <tr>                                                                  
-            <td>E-Mail:</td>                                                    
-            <td><input type="text" name="email"></input></td>                   
-          </tr>                                                                 
-          <tr>                                                                  
-            <td>Country:</td>                                                   
-            <td><input type="text" name="country"></input></td>                 
-          </tr>                                                                 
-          <tr>                                                                  
-            <td>Resume:</td>                                                    
-            <td><input type="file" name="resume"></input></td>                  
-          </tr>                                                                 
-        </table>                                                                 
-        <input type="submit" value="Send">                                      
-    </form> 
+          onsubmit="return validateForm();">
+        <table>
+          <tr>
+	    <td>Name:</td>
+            <td><input type="text" name="name"></input></td>
+          </tr>
+	  <tr>
+            <td>Action:</td>
+            <td><input type="text" name="action"></input></td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td><input type="text" name="description"></input></td>
+          </tr>
+          <tr>
+            <td>Observation:</td>
+            <td><input type="text" name="observation"></input></td>
+          </tr>
+        </table>
+        <input id="btn_create" type="submit" value="Create">
+    </form>
   </div>
 {% endblock %}
