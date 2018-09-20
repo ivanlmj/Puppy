@@ -1,225 +1,105 @@
-<!DOCTYPE html>
-<html>
+{% extends "template.html" %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
 
-    <head>
+    #right_panel {
+	float: left;
+    }
 
-        <title> Shell-WA Panel </title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    #select_action {
+	margin-top: 60px;
+    }
 
-	<style type="text/css">
-            * { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; }
+    #logged_actions {
+	width: 100%;
+	margin-top: 25px;
+	border: 1px solid black;
+    }
 
-	    html, body {
-		height: 100%;
-		margin: 0;
-	    }
+    #logged_actions, th, td {
+	text-align: center;
+	border-collapse: collapse;
+    }
 
+    #logged_actions thead {
+	width: 100%;
+	display: block;
+	background-color: #4CAF50;
+    }
 
-	    #upper_bar {
-		height: 30px;
-		width: 100%;
-		background-color: #4CAF50;
-	    }
+    #logged_actions thead th {
+	height: 30px;
+	width: 200px;
+	font-weight: bold;
+	color: white;
+	background-color: #4CAF50;
+    }
 
-	    #upper_bar table {
-		width: 100%;
-		border-collapse: collapse;
-		border: 0px;
-	    }
+    #logged_actions tbody {
+	width: 100%; height:
+        320px; display: block;
+	overflow: auto;
+    }
 
+    #logged_actions tbody td {
+	height: 30px;
+	width: 15%;
+	color: #666666;
+    }
 
-	    #upper_bar #logout {
-		text-align: right;
-		padding-top: 5px;
-		padding-right: 10px;
-		font-weight: bold;
-	    }
+    #logged_actions tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+    }
+  </style>
+{% endblock %}
 
-	    #upper_bar #logout a {
-		text-decoration: none;
-		color: white;
-	    }
+{% block body %}
+  {{ super() }}
+  <div id="right_panel">
 
-	    #left_panel  {
-                height: 80%;
-                width: 17%;
-                margin-right: 25px;
-                float: left;
-                background-color: #4CAF50;
-	    }
+    <div id="select_action">
+      <form action="/panel/action/run" method="post">
+          <select id="action" name="action_id">
+	  <option selected> Select Action... </option>
+	  <!-- <option>s are added dinamically (actions.js) -->
+	  </select>
+	  <input type="submit" value="Run">
+      </form>
+    </div>
 
-	    #right_panel {
-		float: left;
-	    }
+    <div id="actions">
+      <table id="logged_actions">
+	<thead id="t_head">
+	  <!-- <tr>s are added dinamically (logged_actions.js) -->
+	</thead>
+	<tbody id="t_body">
+	  <!-- <tr>s are added dinamically (logged_actions.js) -->
+	</tbody>
+      </table>
+    </div>
 
-	    #logo {
-		height: 25%;
-		width: 100%;
-		background-color: white;
-	    }
+  </div>
 
-	    img {
-		margin-top: 40px;
-		margin-left: 10px;
-		width: 200px;
-	    }
+  <script src="/static/action_status.js"></script>
+  <script src="/static/actions.js"></script>
+  <script src="/static/logged_actions.js"></script>
+  <script src="/static/ajax.js"></script>
+  <script>
+      // builds <select> box for available Actions
+      ajaxGet("/panel/actions", buildSelect);
 
-	    #menu {
-		margin-top: 30px;
-		height: 10%;
-		width: 100%;
-		border: 0px solid white;
-	    }
+      // builds <table> for logged Actions
+      ajaxGet("/panel/actions/logged", buildTable);
 
-	    #menu tbody {
-		height: 0%;
-	    }
+      /*
+        Performs cookie verification, based on the operation:
+            -> /panel/action/run
+	    -> /panel/action/create
+	    -> /panel/action/update
+	    -> /panel/action/delete
+      */
+      actionStatus();
+  </script>
+{% endblock %}
 
-	    #menu tr {
-		background-color: #f2f2f2;
-		border-spacing: 0px;
-	    }
-
-	    #menu td {
-		height: 27px;
-	        text-align: left;
-		padding-left: 10px;
-		border: 1px solid #f2f2f2;
-		border-collapse: collapse;
-		color: #8c8c8c;
-	    }
-
-	    #menu td:hover {
-		background-color: #b3b3b3;
-	    }
-
-	    #menu a {
-		color: #666666;
-		text-decoration: none;
-	    }
-
-	    #menu a:hover {
-		color: white;
-	    }
-
-	    #select_action { margin-top: 60px; }
-
-	    #logged_actions { width: 100%; border: 1px solid black; margin-top: 25px; }
-
-	    #logged_actions, th, td {
-		text-align: center;
-		border-collapse: collapse;
-	    }
-
-	    #logged_actions thead { width: 100%; display: block; background-color: #4CAF50; }
-	    #logged_actions thead th { height: 30px; width: 200px; background-color: #4CAF50;
-		                        color: white; font-weight: bold; }
-
-	    #logged_actions tbody { width: 100%; height: 320px; display: block; overflow: auto; }
-	    #logged_actions tbody td { height: 30px; width: 15%; color: #666666}
-	    #logged_actions tbody tr:nth-child(even) { background-color: #f2f2f2; }
-
-	    #right_footer {
-		position: absolute;
-		right: 10px;
-		font-size: 12px;
-		bottom: 10px;
-	    }
-
-	    #right_footer a {
-		text-decoration: none;
-		color: black;
-		font-weight: bold;
-	    }
-
-	    #right_footer a:hover {
-		color: blue;
-	    }
-
-
-	</style>
-
-
-    </head>
-
-    <body>
-
-	<div id="upper_bar">
-	  <table>
-	    <tr>
-	      <td></td>
-	      <td id="logout"><a href="#">Logout</a></td>
-            </tr>
-	  </table>
-	</div>
-
-	<div id="left_panel">
-
-	    <div id="logo">
-	      <img src="/static/Shell-WA.png" alt="Shell-WA"></img>
-	    </div>
-
-	    <table id="menu">
-	      <tbody>
-                <tr>
-		    <td> <a href="#"> Panel </a> </td>
-		</tr>
-                <tr>
-		    <td> <a href="#"> Actions </a> </td>
-		</tr>
-                <tr>
-		    <td> <a href="#"> System </a> </td>
-		</tr>
-                <tr>
-		    <td> <a href="#"> Logout </a> </td>
-		</tr>
-	      </tbody>
-            </table>
-
-	</div>
-
-	<div id="right_panel">
-
-	  <div id="select_action">
-	    <form action="/panel/action/run" method="post">
-	        <select id="action" name="action_id">
-		  <option selected> Select Action... </option>
-		  <!-- <option>s are added dinamically (actions.js) -->
-	        </select>
-	        <input type="submit" value="Run">
-	    </form>
-	  </div>
-
-	  <div id="actions">
-	    <table id="logged_actions">
-		<thead id="t_head">
-		</thead>
-		<tbody id="t_body">
-		</tbody>
-	    </table>
-	  </div>
-
-	</div>
-	<p id="right_footer">Fork me on <a href="#">GitHub</a></p>
-
-	<script src="/static/action_status.js"></script>
-	<script src="/static/actions.js"></script>
-	<script src="/static/logged_actions.js"></script>
-	<script src="/static/ajax.js"></script>
-	<script>
-		// builds <select> box for available Actions
-		ajaxGet("/panel/actions", buildSelect);
-		// builds <table> for logged Actions
-		ajaxGet("/panel/actions/logged", buildTable);
-		/*
-		   Performs cookie verification, based on the operation:
-			-> /panel/action/run
-			-> /panel/action/create
-			-> /panel/action/update
-			-> /panel/action/delete
-		 */
-		actionStatus();
-	</script>
-    </body>
-
-</html>
