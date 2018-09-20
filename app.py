@@ -20,6 +20,11 @@ def set_response_headers(response):
     return response
 
 
+@app.route("/template", methods=['GET'])
+def f_template():
+    return render_template("template.html")
+
+
 @app.route("/", methods=['GET'])
 @app.route("/index", methods=['GET'])
 def f_index():
