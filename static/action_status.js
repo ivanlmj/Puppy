@@ -1,7 +1,20 @@
+// Functions invoked at every requested performed to /panel
+//
+// It loops over the cookies of the page.
+//
+// On each iteration, each cookie element is splitted,
+// generating a cookie_key and a cookie value. The cookie_key
+// is verified via switch/case and an alert is displayed
+// for the user, depending of the cookie_value.
+//
+// Independently of the cookie_value, the cookie_key is expired,
+// in order to avoid the alert behaviour defined below.
+
+
 function actionStatus() {
 
     // storing cookie data into variable
-    // cookies are set on demand, deppending on /path/action/<option> request
+    // cookies are set on demand, depending on /path/action/<option> request
     var cookies = document.cookie.split(";");
 
     cookies.forEach(function(element) {
