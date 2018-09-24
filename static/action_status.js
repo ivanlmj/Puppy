@@ -1,30 +1,38 @@
-// Functions invoked at every requested performed to /panel
+// Function invoked at every requested performed to /panel.
 //
 // It loops over the cookies of the page.
 //
 // On each iteration, each cookie element is splitted,
-// generating a cookie_key and a cookie value. The cookie_key
+// generating a cookie_key and a cookie value: the cookie_key
 // is verified via switch/case and an alert is displayed
-// for the user, depending of the cookie_value.
+// for the user, depending of its cookie_value.
 //
 // Independently of the cookie_value, the cookie_key is expired,
-// in order to avoid the alert behaviour defined below.
+// in order to avoid the alert behaviour defined below when accessing
+// /panel, after running, creating, updating or deleting any Action,
+// performed via the URI below:
+//
+//     /panel/action/run
+//     /panel/action/create
+//     /panel/action/update
+//     /panel/action/delete
 
 
 function actionStatus() {
 
-    // storing cookie data into variable
-    // cookies are set on demand, depending on /path/action/<option> request
+    // Storing cookie data into variable.
+    // Cookies are set on demand, depending on /path/action/<option> request.
     var cookies = document.cookie.split(";");
 
+    // Checking each cookie found for the page.
     cookies.forEach(function(element) {
-	// after the evaluation of the cookie_key, the value is evaluated
-	// and the specific cookie is cleaned
 
         data = element.split("=");
 	cookie_key = data[0].trim()
 	cookie_value = data[1].trim()
 
+	// Each cookie_key is evaluated; its cookie_value
+	// is verified and the specific cookie is cleaned.
 	switch (cookie_key) {
 	    case "run_status":
 		if (cookie_value == "0") {
