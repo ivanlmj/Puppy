@@ -81,23 +81,24 @@
 
   </div>
 
-  <script src="/static/action_status.js"></script>
-  <script src="/static/builder.js"></script>
   <script src="/static/ajax.js"></script>
+  <script src="/static/builder.js"></script>
+  <script src="/static/action_status.js"></script>
   <script>
-      // builds <select> box for available Actions
+      /*
+         Builds:
+           <select> for available actions
+           <table> for logged actions
+         See ajax.js and builder.js.
+      */
       ajaxGet("/panel/actions", buildSelect);
-
-      // builds <table> for logged Actions
       ajaxGet("/panel/actions/logged", buildTable);
 
       /*
-        Performs cookie verification, based on the operation:
-            -> /panel/action/run
-	    -> /panel/action/create
-	    -> /panel/action/update
-	    -> /panel/action/delete
+	 Performs cookie check, based on operation for actions.
+	 See action_status.js
       */
+
       actionStatus();
   </script>
 {% endblock %}
