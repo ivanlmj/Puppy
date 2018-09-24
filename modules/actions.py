@@ -87,6 +87,10 @@ class Action:
             self.db.conn.commit()
             action  = action_data[0]
             command = action_data[1]
+            # TODO:
+            #
+            # 1 - expand env variables: os.path.expand(command)
+            # 2 - sanitize command for cases like "rm -rf /"
             result  = sp.call(command.split())
             if result == 0:
                 query_action_log  = """ INSERT INTO ActionsLog
