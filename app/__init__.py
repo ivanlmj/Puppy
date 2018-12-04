@@ -16,7 +16,7 @@ def set_response_headers(response):
     return response
 
 
-from views import index
-from views import login
-from views import panel
-from views import template
+from app.views import index
+from app.views import login
+from app.views import panel
+from app.views import template
