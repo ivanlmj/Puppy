@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-from . import database
+from app.modules import database
+
 
 class User:
-
 
     def __init__(self):
         self.db = database.SQLite()
