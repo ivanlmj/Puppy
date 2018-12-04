@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
-from . import database
 import subprocess as sp
+from app.modules import database
+
 
 class Action:
-
 
     def __init__(self):
         self.db = database.SQLite()
