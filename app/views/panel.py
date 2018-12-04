@@ -1,7 +1,7 @@
 
 
 from json import dumps
-from app import render_template, redirect, render_template, request
+from app import app, render_template, redirect, render_template, request
 from app.modules import actions
 from app.modules import users
 
