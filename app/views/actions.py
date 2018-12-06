@@ -1,59 +1,61 @@
 
 
 from json import dumps
-from app import app, render_template, redirect, render_template, request
+import requests
+from app import (
+    app,
+    abort,
+    render_template,
+    redirect,
+    render_template,
+    request
+)
 from app.modules import actions
-from app.modules import users
-
-@app.route("/panel", methods=['GET'])
-def f_panel():
-    return render_template("panel.html")
 
 
-@app.route("/panel/action", methods=['GET'])
-def f_action():
-    if request.method == "GET":
-        return render_template("action.html")
-
-
-@app.route("/panel/action/<option>", methods=['POST'])
-def f_panel_action(option):
-    if request.method == "POST":
-        response = make_response(redirect('/panel'))
-        action_obj = actions.Action()
-        if option == "run":
-            action_id = request.form["action_id"]
-            username = request.cookies.get('username')
-            result = action_obj.run(action_id, username)
-            response.set_cookie('run_status', str(result))
-        elif option == "create":
-            name = request.form["name"]
-            action = request.form["action"]
-            result = action_obj.create(name, action)
-            response.set_cookie('create_status', str(result))
-        elif option == "update":
-            action_id = request.form["id"]
-            name = request.form["name"]
-            action = request.form["action"]
-            result = action_obj.update(action_id, name, action)
-            response.set_cookie('update_status', str(result))
-        elif option == "delete":
-            action_id = request.form["id"]
-            result = action_obj.delete(action_id)
-            response.set_cookie('delete_status', str(result))
-
-        return response
-
-
-@app.route("/panel/actions", methods=['GET'])
+@app.route("/panel/actions", methods = ['GET'])
 def f_actions():
-    action = actions.Action()
-    load_actions = action.show()
-    return dumps(load_actions)
+    if request.method == "GET":
+        if "logged_in" in session:
+            action = actions.Action()
+            list_actions = action.show()
+            return dumps(list_actions)
+        abort(401) # Not Authorized (must authenticate)
+    else:
+        abort(405) # Method Not Allowed
 
 
-@app.route("/panel/actions/logged", methods=['GET'])
-def f_logged_actions():
-    action = actions.Action()
-    logged = action.logged()
-    return dumps(logged)
+@app.route("/panel/actions/create", methods = ['GET'])
+def f_actions_create():
+    if request.method == "GET":
+        if "logged_in" in session:
+            return render_template("action_form.html")
+        return redirect("/login")
+    else:
+        abort(405) # Method Not Allowed
+
+
+@app.route("/panel/actions/update/<int:id>", methods = ['GET'])
+def f_actions_update(action_id):
+    if request.method == "GET":
+        if "logged_in" in session:
+            api_uri = "http://127.0.0.1:5000/api/v1.0/actions" + "/" + action_id
+            update_action = actions.Action()
+            r  = requests.get(api_uri)
+            return render_template("action_form.html", action_data = r.text)
+        return redirect("/login")
+    else:
+        abort(405) # Method Not Allowed
+
+
+@app.route("/panel/actions/run/<int:action_id>", methods = ['GET'])
+def f_actions_run(action_id):
+    if request.method == "GET":
+        if "logged_in" in session:
+            username = request.cookies.get("username")
+            action = actions.Action()
+            result = action.run(action_id, username)
+            return str(result)
+        return redirect("/login")
+    else:
+        abort(405) # Method Not Allowed
