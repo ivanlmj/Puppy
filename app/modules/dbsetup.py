@@ -10,18 +10,18 @@ def run():
                 - Users:      user management
                 - Sessions:   controlling sessions of authenticated users
                 - Actions:    commands exposed as actions
-                - ActionsLog: register of executed actions
+                - ActionsHistory: register of executed actions
         """
         cursor = db.conn.cursor()
         # cleaning database
         drop_users = """ DROP TABLE IF EXISTS Users """
         drop_sessions = """ DROP TABLE IF EXISTS Sessions """
         drop_actions = """ DROP TABLE IF EXISTS Actions """
-        drop_actions_log = """ DROP TABLE IF EXISTS ActionsLog """
+        drop_actions_history = """ DROP TABLE IF EXISTS ActionsHistory """
         cursor.execute(drop_users)
         cursor.execute(drop_sessions)
         cursor.execute(drop_actions)
-        cursor.execute(drop_actions_log)
+        cursor.execute(drop_actions_history)
 	# building database
         users = """ CREATE TABLE Users
         (Id INTEGER PRIMARY KEY,
@@ -38,7 +38,7 @@ def run():
         Name TEXT NOT NULL, Action TEXT NOT NULL,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
-        actions_log = """ CREATE TABLE ActionsLog
+        actions_history = """ CREATE TABLE ActionsHistory
         (Id INTEGER PRIMARY KEY,
         Name TEXT NOT NULL, ReturnCode INT NOT NULL, RunBy TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -50,7 +50,7 @@ def run():
             cursor.execute(users)
             cursor.execute(sessions)
             cursor.execute(actions)
-            cursor.execute(actions_log)
+            cursor.execute(actions_history)
             cursor.execute(adding_user)
             db.conn.commit()
             return 0
