@@ -1,5 +1,16 @@
 
-from app import app, make_response, redirect, render_template, request
+""" Module for /login route. """
+
+from app import (
+        app,
+        abort,
+        make_response,
+        redirect,
+        render_template,
+        request,
+        session
+)
+
 from app.modules import users
 
 
@@ -13,6 +24,7 @@ def f_login():
         user = users.User()
         status = user.login(username, password)
         if status == 0:
+            session["logged_in"] = True
             response = make_response(redirect('/panel'))
             response.set_cookie('username', username)
             return response
@@ -20,4 +32,6 @@ def f_login():
             print("Status:", status)
             message = "Check Username and Password."
             return render_template("login.html", login_status=message)
+    else:
+        abort(405)
 
