@@ -34,12 +34,12 @@ class Action:
             Updates an existent action.
 
             Parameters:
-                - action_id: id of the action that should be updated
+                - action_id: Id of the action that is going to be updated
         """
         try:
             cursor = self.db.conn.cursor()
             query = """ UPDATE Actions SET Name={0}, Action={1}
-                        WHERE Id = {2}""".format(name, action, action_id)
+                        WHERE Id={2}""".format(name, action, action_id)
             cursor.execute(query)
             self.db.conn.commit()
             return 0
@@ -47,22 +47,27 @@ class Action:
             return e
 
 
-    def delete(self, name):
+    def delete(self, action_id):
         """
             Removes an action.
 
             Parameters:
-                - name:   action name
+                - action_id: Id of the Action
+
+            Return:
+                - 0: action removed
+                - 1: action not removed
         """
         try:
             cursor = self.db.conn.cursor()
-            query = """ DELETE FROM Actions WHERE Name='{0}'""".format(name)
+            query = """ DELETE FROM Actions WHERE Id='{0}'""".format(name)
             cursor.execute(query)
             self.db.conn.commit()
-            query_remove = """ SELECT * FROM Actions
-                               WHERE Name='{0}'""".format(name)
-            cursor.execute(query_remove)
+            check_remove = """ SELECT * FROM Actions
+                               WHERE Id='{0}'""".format(name)
+            cursor.execute(check_remove)
             data = cursor.fetchall()
+            self.db.conn.commit()
             if len(data) == 0:
                 return 0
             else:
@@ -93,7 +98,7 @@ class Action:
             # 2 - sanitize command for cases like "rm -rf /"
             result  = sp.call(command.split())
             if result == 0:
-                query_action_log  = """ INSERT INTO ActionsLog
+                query_action_log  = """ INSERT INTO ActionsHistory
                 (Name, ReturnCode, RunBy) VALUES('{0}', '{1}', '{2}')
                 """.format(action, result, user)
                 cursor.execute(query_action_log)
@@ -107,10 +112,13 @@ class Action:
 
     def show(self, action_id=None):
         """
-         Shows actions as JSON document.
+            Lists created actions (depending on optional parameter).
 
             Parameters:
-                - action_id (optional): action_id for retrieving specific data
+                - action_id (opt): Id for specific action
+
+            Return:
+                - list : created actions
         """
         try:
             cursor = self.db.conn.cursor()
@@ -128,15 +136,18 @@ class Action:
             return e
 
 
-    def logged(self):
+    def history(self):
         """
-            List logged actions.
+            Lists executed actions.
+
+            Return:
+                - list : executed actions
         """
         try:
             cursor = self.db.conn.cursor()
-            query = """ SELECT * FROM ActionsLog """
+            query = """ SELECT * FROM ActionsHistory """
             cursor.execute(query)
-            data = cursor.fetchall()
+            data = [ row for row in cursor.fetchall() ]
             self.db.conn.commit()
             return data
         except Exception as e:
