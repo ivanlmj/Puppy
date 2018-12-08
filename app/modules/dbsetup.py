@@ -25,22 +25,28 @@ def run():
 	# building database
         users = """ CREATE TABLE Users
         (Id INTEGER PRIMARY KEY,
-        FullName TEXT, UserName TEXT, PassWord TEXT,
+        FullName TEXT,
+        UserName TEXT,
+        PassWord TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         sessions = """ CREATE TABLE Sessions
         (Id INTEGER PRIMARY KEY,
-        UserName TEXT NOT NULL, Token TEXT NOT NULL,
+        UserName TEXT NOT NULL,
+        Token TEXT NOT NULL,
         StartTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         EndTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         actions = """ CREATE TABLE Actions
         (Id INTEGER PRIMARY KEY,
-        Name TEXT NOT NULL, Action TEXT NOT NULL,
+        Name TEXT NOT NULL,
+        Action TEXT NOT NULL,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         actions_history = """ CREATE TABLE ActionsHistory
         (Id INTEGER PRIMARY KEY,
-        Name TEXT NOT NULL, ReturnCode INT NOT NULL, RunBy TEXT,
+        Name TEXT NOT NULL,
+        ReturnCode INT NOT NULL,
+        RunBy TEXT,
         CreateTime DATETIME DEFAULT CURRENT_TIMESTAMP,
         UpdateTime DATETIME DEFAULT CURRENT_TIMESTAMP) """
         adding_user = """ INSERT INTO
