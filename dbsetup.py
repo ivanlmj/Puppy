@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import database
+from app.modules import database
 
 db = database.SQLite()
 
