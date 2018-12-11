@@ -3,6 +3,8 @@
 from app.modules import database
 
 db = database.SQLite()
+db.subdir = "/app/modules"
+db.connector()
 
 def run():
         """
